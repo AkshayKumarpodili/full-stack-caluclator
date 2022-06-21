@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/full-stack-caluclator/static/css/main.d7cc965f.css",
+    "main.js": "/full-stack-caluclator/static/js/main.390e25bc.js",
+    "static/js/787.c95d6d41.chunk.js": "/full-stack-caluclator/static/js/787.c95d6d41.chunk.js",
+    "index.html": "/full-stack-caluclator/index.html",
+    "main.d7cc965f.css.map": "/full-stack-caluclator/static/css/main.d7cc965f.css.map",
+    "main.390e25bc.js.map": "/full-stack-caluclator/static/js/main.390e25bc.js.map",
+    "787.c95d6d41.chunk.js.map": "/full-stack-caluclator/static/js/787.c95d6d41.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7cc965f.css",
+    "static/js/main.390e25bc.js"
+  ]
+}
