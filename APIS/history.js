@@ -16,7 +16,6 @@ userApp.get('/getAllData',expressAsyncHandler(async (request,response)=>{
     //read all users
     //let history = await calcCollectionObject.find().toArray();
     let history = await projectCollectionObject.find().toArray();
-    console.log("history is ", history);
     //send response
     response.send({message:"Total History:  ",payload: history});
 }));
@@ -31,4 +30,6 @@ userApp.post('/createobject',expressAsyncHandler(async(request,response)=>{
   await projectCollectionObject.insertOne(histObj);
   response.send({message:"Object Creation Success"});
 }));
+
+//export const project=history;
 module.exports=userApp;

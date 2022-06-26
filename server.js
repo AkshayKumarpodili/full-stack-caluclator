@@ -45,9 +45,9 @@ app.use(exp.static(path.join(__dirname,'./build')));
  app.use('/history',userApp);
 
 
-//  app.use('*',(request,response)=>{
-//   response.sendFile(path.join(__dirname,'./build/index.html'));
-// })
+ app.use('*',(request,response)=>{
+  response.sendFile(path.join(__dirname,'./build/index.html'));
+})
 
 
 app.listen(4000, ()=> console.log("server listening on port 4000.."));

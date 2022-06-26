@@ -6,7 +6,7 @@
     width: 40vw;
     background-color: blueviolet;
     overflow: hidden;
-     
+    overflow-y: scroll;
 
     
 }

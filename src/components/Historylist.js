@@ -1,40 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 //import './History.css';
+//import { projectObj} from "./App.js";
 
 
-function Historylist() {
+function Historylist(props) {
+console.log(props.pro_ans);
+
   return (
   <Container>
     <div className='container'>
     <h1>Historylist</h1>
     <div className='classone'>
-      <p>
-      What is Lorem Ipsum?
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-      Why do we use it?
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                Why do we use it?
-                It is a long established fact that a reader will be d
-                Why do we use it?
-                It is a long established fact that a reader will be d
-                Why do we use it?
-                overflow-y: scroll;
-                Why do we use it?
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                Why do we use it?
-                It is a long established fact that a reader will be d
-                Why do we use it?
-                It is a long established fact that a reader will be d
-                {/* Why do we use it?
-                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                Why do we use it?
-                It is a long established fact that a reader will be d
-                Why do we use it?
-                It is a long established fact that a reader will be d
-                It is a long established fact that a reader will be d */}
-      </p>
+        <div>
+          {
+            props.pro_ans.map((res,id) =>
+             <h1 key={id} >{res.operandOne}</h1>
+            //   // <h1 key={res.id}>{res.operandTwo}</h1>
+            //   // <h1 key={res.id}>{res.dbObject.operator}</h1> 
+            //   // <h1 key={res.id}>{res.answer}</h1> 
+            //   // <h1 key={res.id}>{res.time}</h1>
+            //   console.log(res)
+            )
+          }
+        </div>
     </div>
     </div>
   </Container>  
@@ -45,20 +34,18 @@ const Container = styled.div`
 
 .container
 {
-   .classone 
+  .classone 
   {
-     height: 90vh;
-     width: 40vw;
-     background-color: black;
-     border-radius: 0.7rem;
-     overflow: hidden;
+    height: 90vh;
+    width: 40vw;
+    background-color: black;
+      overflow: hidden;
      overflow-y: scroll;
-
-     
-     .p
+     .h1
      {
        color : white;
      }
+    } 
   }
 }  
 `;

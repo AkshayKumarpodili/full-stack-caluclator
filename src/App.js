@@ -1,8 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './App.css';
 import {useForm} from 'react-hook-form';
-import Historylist from './components/Historylist';
-//import Home from './components/Home';
+//import Historylist from './components/Historylist';
+
 import axios from 'axios';
 
 
@@ -10,9 +10,27 @@ import axios from 'axios';
 function App() {
   const [calc,setCalc]=useState("");
   const [result,setResult]=useState("");
+  const [firstobj,setFirstobj]=useState([]);
   const ops=['/','*','+','-','.'];
   var [res, setRes]=useState('');
-  //console.log("res-1 is ",res);
+  var arr = [];
+  useEffect(()=>{
+    // axios.get('http://localhost:4000/history/getAllData')
+    // .then((data)=>{
+    //   const dbData = data.data.payload;
+    //   arr.push(dbData);
+    //   //console.log(dbData);
+    //   console.log(arr[0]);
+
+    fetch('http://localhost:4000/history/getAllData')
+    .then(response=>response.json())
+    .then(apiData => setFirstobj(apiData.payload))
+    .catch(err=>console.log(err))
+
+
+    //});
+  },[]);
+
   const updateCalc=value=>{
      if( ops.includes(value) && calc==='' || (ops.includes(value) && ops.includes(calc.slice(-1))) )
      {
@@ -28,9 +46,8 @@ function App() {
 
   }
 
-   const createDigits=()=>{
+  const createDigits=()=>{
        const digits=[];
-
        for(let i=1;i<10;i++)
        {
             digits.push(
@@ -43,7 +60,6 @@ function App() {
          return digits; 
    }
 
-   //console.log("res is ",res);
 
    const caluclate = () => {
      let opt;
@@ -73,17 +89,19 @@ function App() {
       }
      }
 
-     let histArr=[];
+     //let res_string = "";
      let dbObject = {};
      dbObject.operandOne = opArr[0];
      dbObject.operandTwo = opArr[1];
      dbObject.operator = opt;
      dbObject.answer = ans;
      dbObject.time= new Date().toString();
+     //res_string+=opArr[0]+ ' '+opt+ ' '+opArr[1]+ ' = ' + ans ;
+     
+     //console.log(res_string);
 
-     const obj = dbObject;
-     histArr.push(obj);
-     console.log("histArr = ",histArr);
+     //const obj = {ans :res_string};
+     const obj=dbObject;
       axios.post('http://localhost:4000/history/createobject', obj)
      .then(response=>{
       //console.log("response is ",response.data);
@@ -97,17 +115,15 @@ function App() {
     console.log("error is ",error) 
     alert("Something went wrong in creating user")
   })
+
+  
 }
 
-
-
-
 const {register, handleSubmit, formState: {errors}} = useForm();
-const [history,setHistory] = useState([]);
 
-const onFormSubmit = (dbObject) => {
-   console.log("onFromSubmit2 = ", dbObject);
-   setHistory([...history,dbObject]);
+
+const OnFormSubmit = (dbObject) => {
+
 }
 
    const deleteLast = () => {
@@ -127,7 +143,7 @@ const onFormSubmit = (dbObject) => {
     
     <div className='row' >  
     
-    <div className='col-sm-6'>
+    <div className='col-sm-4'>
        <h1>Caluclator</h1>
       <div className="caluclator">
        
@@ -146,20 +162,47 @@ const onFormSubmit = (dbObject) => {
              {createDigits()}
              <button onClick={() => updateCalc('0') }>0</button>
             <button  onClick={() => updateCalc('.') }>.</button>
-            <button onClick={caluclate}>=</button>
+            <button onClick={caluclate} >=</button>
          </div>
       </div> 
 
       <div className='hist'>  
-        <form onSubmit={handleSubmit(onFormSubmit)}>
+        <form onSubmit={handleSubmit(OnFormSubmit)}>
            <button type='submit'> <h4>History</h4> </button>
-
         </form>
       </div>
     </div>
 
-    <div className='col-sm-6'>
-          <Historylist  />
+    <div className='col-sm-8'>
+    <h1>Historylist({firstobj.length})</h1>
+      <div className='secondRow'>
+          {/* <Historylist pro_ans = {arr} /> */}
+        
+          <table className=' table '>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>operandOne</th>
+                <th>operator</th>
+                <th>operatorTwo</th>
+                <th>answer</th>
+                <th>time</th>
+              </tr>
+            </thead>
+              <tbody>
+                {
+                   firstobj.map((pro_ans)=><tr key={pro_ans.id}>
+                      <td>{pro_ans.id}</td>
+                      <td>{pro_ans.operandOne}</td>
+                      <td>{pro_ans.operator}</td>
+                      <td>{pro_ans.operandTwo}</td>
+                      <td>{pro_ans.answer}</td>
+                      <td>{pro_ans.time}</td>
+                   </tr>)
+                }
+              </tbody>
+          </table>
+    </div>       
     </div>
 
     </div>  
@@ -169,20 +212,3 @@ const onFormSubmit = (dbObject) => {
 
 export default App;
 
-
-
-
-
-
-
-// function App() {
-//   return (
-//     <div className='row'>
-//        <Home />
-//        <Historylist/>
-//     </div>
-    
-//   )
-// }
-
-// export default App
