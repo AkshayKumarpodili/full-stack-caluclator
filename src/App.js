@@ -1,7 +1,10 @@
 import React,{useState, useEffect} from 'react';
 import './App.css';
+import './tableresponsive.css';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
+import './calc.css';
+
 
 
 function App() {
@@ -122,7 +125,7 @@ function App() {
     <div className='row' >  
     
     <div className='col-sm-4'>
-       <h1>Caluclator</h1>
+       <h1 className='headingone'>Caluclator</h1>
       <div className="caluclator">
        
        <div className='display'>{ result ? <span>({result})</span> : ''}&nbsp; { calc || "0"}</div>
@@ -148,10 +151,10 @@ function App() {
     </div>
 
     <div className='col-sm-8'>
-    <h1>Historylist({firstobj.length})</h1>
+    <h1 className='headingtwo'>Historylist({firstobj.length})</h1>
       <div className="secondRow">
           
-          <Table>
+          <Table responsive>
             <thead>
               <tr>
                 <th>OperandOne</th>
