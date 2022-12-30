@@ -89,8 +89,7 @@ button:hover {
 }
 
 
-.hist button {
-  
+.hist button {  
   padding: 0.6rem;
   margin-top: 2rem;
   border-radius: 0.4rem;
@@ -98,14 +97,12 @@ button:hover {
   width: 40%;
   text-align: center;
   background-color: aqua;
-
-
 }
 
 
 .secondRow {
   margin-top: 40px;
-  height: 40vh;
+  height: 60vh;
   width: 63vw;
   font-size: 17px;
   background-color: yellow;

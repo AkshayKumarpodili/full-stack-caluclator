@@ -1,10 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import './App.css';
-import {useForm} from 'react-hook-form';
-//import Historylist from './components/Historylist';
-
 import axios from 'axios';
-
+import { Table } from 'react-bootstrap';
 
 
 function App() {
@@ -13,22 +10,13 @@ function App() {
   const [firstobj,setFirstobj]=useState([]);
   const ops=['/','*','+','-','.'];
   var [res, setRes]=useState('');
-  var arr = [];
+  
   useEffect(()=>{
-    // axios.get('http://localhost:4000/history/getAllData')
-    // .then((data)=>{
-    //   const dbData = data.data.payload;
-    //   arr.push(dbData);
-    //   //console.log(dbData);
-    //   console.log(arr[0]);
-
+   
     fetch('http://localhost:4000/history/getAllData')
     .then(response=>response.json())
     .then(apiData => setFirstobj(apiData.payload))
     .catch(err=>console.log(err))
-
-
-    //});
   },[]);
 
   const updateCalc=value=>{
@@ -89,22 +77,17 @@ function App() {
       }
      }
 
-     //let res_string = "";
+     
      let dbObject = {};
      dbObject.operandOne = opArr[0];
      dbObject.operandTwo = opArr[1];
      dbObject.operator = opt;
      dbObject.answer = ans;
      dbObject.time= new Date().toString();
-     //res_string+=opArr[0]+ ' '+opt+ ' '+opArr[1]+ ' = ' + ans ;
      
-     //console.log(res_string);
-
-     //const obj = {ans :res_string};
      const obj=dbObject;
       axios.post('http://localhost:4000/history/createobject', obj)
      .then(response=>{
-      //console.log("response is ",response.data);
       alert(response.data.message);
       if(response.data.message==="Object Creation Success")
       {
@@ -119,12 +102,7 @@ function App() {
   
 }
 
-const {register, handleSubmit, formState: {errors}} = useForm();
 
-
-const OnFormSubmit = (dbObject) => {
-
-}
 
    const deleteLast = () => {
      if(calc === '') {
@@ -166,42 +144,33 @@ const OnFormSubmit = (dbObject) => {
          </div>
       </div> 
 
-      <div className='hist'>  
-        <form onSubmit={handleSubmit(OnFormSubmit)}>
-           <button type='submit'> <h4>History</h4> </button>
-        </form>
-      </div>
+      
     </div>
 
     <div className='col-sm-8'>
     <h1>Historylist({firstobj.length})</h1>
-      <div className='secondRow'>
-          {/* <Historylist pro_ans = {arr} /> */}
-        
-          <table className=' table '>
+      <div className="secondRow">
+          
+          <Table>
             <thead>
               <tr>
-                <th>Id</th>
-                <th>operandOne</th>
-                <th>operator</th>
-                <th>operatorTwo</th>
-                <th>answer</th>
-                <th>time</th>
+                <th>OperandOne</th>
+                <th>Operator</th>
+                <th>OperatorTwo</th>
+                <th>Answer</th>
               </tr>
             </thead>
               <tbody>
                 {
                    firstobj.map((pro_ans)=><tr key={pro_ans.id}>
-                      <td>{pro_ans.id}</td>
                       <td>{pro_ans.operandOne}</td>
                       <td>{pro_ans.operator}</td>
                       <td>{pro_ans.operandTwo}</td>
                       <td>{pro_ans.answer}</td>
-                      <td>{pro_ans.time}</td>
                    </tr>)
                 }
               </tbody>
-          </table>
+          </Table>
     </div>       
     </div>
 
