@@ -159,7 +159,7 @@ function App() {
               <tr>
                 <th>OperandOne</th>
                 <th>Operator</th>
-                <th>OperatorTwo</th>
+                <th>OperandTwo</th>
                 <th>Answer</th>
               </tr>
             </thead>
